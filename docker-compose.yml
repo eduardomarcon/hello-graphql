@@ -1,0 +1,23 @@
+version: "2"
+services:
+  app:
+    container_name: app-graphql
+    build: ./app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+  api:
+    container_name: api-graphql
+    build: ./api
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo-graphql
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
